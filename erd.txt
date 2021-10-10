@@ -1,0 +1,59 @@
+User 
+- id (pk)
+- username
+- password
+- fullname
+- level
+- picture_path
+- role_id (FK to Role)
+
+Role
+- id (pk)
+- name 
+
+Game
+- id (pk)
+- title
+- price
+- description
+- long_description
+- developer
+- publisher
+- image_cover_path
+- category_id (fk to Category)
+- contain_adult_content
+- trailer_video_path
+- release_date
+
+Category
+- id (pk)
+- name
+
+ShoppingCart
+- user_id (pk, fk to User)
+- game_id (pk, fk to Game)
+
+TransactionHeader
+- id (pk)
+- user_id (fk to User)
+- card_name
+- card_number
+- card_expire_date
+- cvc_cvv
+- country
+- zip_code
+- purchase_date
+
+TransactionDetail
+- transaction_id (pk, fk to TransactionHeader)
+- game_id (pk, fk to Game)
+
+FriendRequest
+- requester_user_id (pk, fk to User)
+- target_user_id (pk, fk to User)
+- status
+
+Friend
+- first_user (pk, fk to User)
+- second_user (pk, fk to User)
+
