@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="m-5" >
-        <div class="min-h-screen rounded-xl bg-gray-700 flex">
+        <div class="min-h-screen rounded-xl bg-gray-800 flex">
             <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div class="mx-auto w-full max-w-sm lg:w-96">
                     <div>
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="space-y-1">
-                                    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+                                    <label for="role" class="block text-sm font-medium text-white">Role</label>
                                     <select id="role" name="role" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                         <option>-- SELECT ROLE --</option>
                                         @foreach($roles as $role)
