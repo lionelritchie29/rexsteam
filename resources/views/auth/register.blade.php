@@ -39,17 +39,18 @@
                                         Password
                                     </label>
                                     <div class="mt-1">
-                                        <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input id="password" name="password" type="password" autocomplete="current-password" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label for="role" class="block text-sm font-medium text-white">
-                                        Role
-                                    </label>
-                                    <div class="mt-1">
-                                        <input name="role" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    </div>
+                                <div class="space-y-1">
+                                    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+                                    <select id="role" name="role" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                        <option>-- SELECT ROLE --</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div>
