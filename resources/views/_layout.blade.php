@@ -16,6 +16,13 @@
         </style>
     </head>
     <body class="bg-gray-700">
+        @if(session('success'))
+            <x-banner type="success" message="{{ session('success') }}"></x-banner>
+        @elseif(session('failed'))
+            <x-banner type="success" message="{{ session('failed')  }}"></x-banner>
+        @endif
+
+
         <nav class="bg-gray-800">
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div class="relative flex items-center justify-between h-16">
@@ -44,8 +51,8 @@
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <a href="{{ route('login')  }}" class="text-white hover:bg-gray-700 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
-                        <a href="{{ route('register')  }}" class="text-white hover:bg-gray-700 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</a>
+                        <a href="{{ route('showLogin')  }}" class="text-white hover:bg-gray-700 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                        <a href="{{ route('showRegister')  }}" class="text-white hover:bg-gray-700 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</a>
 
                         <!-- Profile dropdown -->
                         <div class="ml-3 relative">
@@ -68,9 +75,9 @@
                             -->
                             <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                                <a href="#" class="block px-4 py-2 text-sm text-white" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-white" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-white" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                             </div>
                         </div>
                     </div>

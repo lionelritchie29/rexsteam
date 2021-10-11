@@ -3,5 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
+
+
     hehe
 @endsection
