@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::prefix('auth')->group(function () {
+Route::middleware('guest')->prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('showLogin');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('showRegister');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
