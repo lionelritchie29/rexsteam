@@ -6,6 +6,7 @@ use App\Helper\Constant;
 use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use MongoDB\Driver\Session;
 
 class CartController extends Controller
 {
@@ -28,7 +29,7 @@ class CartController extends Controller
         $game_ids_in_cart = null;
 
         if (Cookie::get(Constant::$CART_KEY)) {
-            $game_ids_in_cart = explode(',', Cookie::get('cart'));
+            $game_ids_in_cart = explode(',', Cookie::get(Constant::$CART_KEY));
 //            dd(Cookie::get(Constant::$CART_KEY));
         }
 
@@ -44,5 +45,24 @@ class CartController extends Controller
         }
 
         return redirect()->back()->with('success', 'Succesfully added ' . $game_title . ' to the cart!');
+    }
+
+    public function confirmDelete(Request $request) {
+        $game_id = $request->input('game_id');
+
+        $game = Game::find($game_id);
+        return redirect()->back()->with('confirm-delete', $game);
+    }
+
+    public function delete(Request $request) {
+        $game_id = $request->input('game_id');
+        $game_ids_in_cart = explode(',', Cookie::get(Constant::$CART_KEY));
+
+        $index = array_search($game_id, $game_ids_in_cart);
+        unset($game_ids_in_cart[$index]);
+
+        Cookie::queue(Constant::$CART_KEY, join(',', $game_ids_in_cart), $this->ONE_DAY_IN_MINUTES);
+
+        return redirect()->back();
     }
 }

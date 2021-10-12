@@ -36,6 +36,8 @@ Route::prefix('game')->group(function() {
 });
 
 Route::middleware('auth')->prefix('cart')->group(function() {
-    Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/confirm-delete', [CartController::class, 'confirmDelete'])->name('cart.confirm-delete');
+    Route::post('/delete', [CartController::class, 'delete'])->name('cart.delete');
 });
