@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
         DB::table('roles')->insert([
             'name' => 'member',
         ]);
+
+        $this->call([
+            CategorySeeder::class,
+            GameSeeder::class,
+            GameCategorySeeder::class,
+        ]);
     }
 }
