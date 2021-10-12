@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -32,5 +33,27 @@ class AuthController extends Controller
         ]);
 
         return redirect()->route('home')->with('success', 'You have been registered succesfully!');
+    }
+
+    public function login(Request $request) {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('home')->with('success', 'Succesfully logged in');
+        }
+
+        return redirect()->back()->with('failed', 'Wrong combination of username and password');
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
     }
 }
