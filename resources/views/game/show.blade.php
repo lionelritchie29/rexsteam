@@ -40,18 +40,23 @@
         <div class="bg-gray-900 px-4 py-8 rounded-md relative">
             <span class="text-white font-lg">Buy <span class="font-semibold">{{ $game->title }}</span></span>
 
-            <button class="shadow-lg absolute rounded-sm  -bottom-2 right-3 bg-blue-600 hover:bg-blue-500 cursor-pointer flex text-white px-3 py-1">
-                <div>
-                    Rp. {{ $game->price }}
-                </div>
-                <div class="mx-2">
-                    |
-                </div>
-                <div class="flex items-center">
-                    <x-grommet-cart class="w-4 h-4 mr-1"/>
-                    Add to Cart
-                </div>
-            </button>
+            <form action="{{ route('cart.add') }}" method="POST">
+                @csrf
+                <input type="hidden" name="game_id" value="{{ $game->id }}">
+                <input type="hidden" name="game_title" value="{{ $game->title }}">
+                <button class="shadow-lg absolute rounded-sm  -bottom-2 right-3 bg-blue-600 hover:bg-blue-500 cursor-pointer flex text-white px-3 py-1">
+                    <div>
+                        Rp. {{ $game->price }}
+                    </div>
+                    <div class="mx-2">
+                        |
+                    </div>
+                    <div class="flex items-center">
+                        <x-grommet-cart class="w-4 h-4 mr-1"/>
+                        Add to Cart
+                    </div>
+                </button>
+            </form>
         </div>
     </section>
 

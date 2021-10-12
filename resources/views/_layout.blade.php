@@ -74,9 +74,9 @@
                             </div>
 
                             <div class="text-white flex items-center">
-                                <button>
+                                <a href="{{ route('cart.index') }}">
                                     <x-grommet-cart class="w-6 h-6" />
-                                </button>
+                                </a>
                             </div>
 
                             <div class="ml-3 relative">

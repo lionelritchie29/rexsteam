@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\GameController;
+use \App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,9 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('game')->group(function() {
     Route::get('/{id}', [GameController::class, 'show'])->name('game.show');
+});
+
+Route::middleware('auth')->prefix('cart')->group(function() {
+    Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
 });
