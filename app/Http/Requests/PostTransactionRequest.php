@@ -13,7 +13,7 @@ class PostTransactionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class PostTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'card_name' => 'required|string|min:6',
+            'card_number' => 'required',
+            'mm' => 'required|numeric|min:1,12',
+            'yy' => 'required|numeric|min:2021,2050',
+            'cvv' => 'required|numeric|between:3,4',
+            'zipcode' => 'required|numeric',
         ];
     }
 }

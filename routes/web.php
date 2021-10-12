@@ -45,4 +45,5 @@ Route::middleware('auth')->prefix('cart')->group(function() {
 
 Route::middleware('auth')->prefix('transaction')->group(function() {
     Route::get('/create', [TransactionController::class, 'create'])->name('transaction.create');
+    Route::post('/store', [TransactionController::class, 'store'])->name('transaction.store');
 });
