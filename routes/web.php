@@ -16,6 +16,7 @@ use \App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 Route::prefix('auth')->group(function () {
     Route::middleware('guest')->group(function() {
