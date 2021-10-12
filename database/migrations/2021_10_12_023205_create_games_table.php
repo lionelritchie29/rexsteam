@@ -25,6 +25,7 @@ class CreateGamesTable extends Migration
             $table->string('trailer_video_path');
             $table->date('release_date');
             $table->boolean('contain_adult_content');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

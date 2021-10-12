@@ -25,6 +25,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/1.webm',
             'release_date' => '2016-08-12',
             'contain_adult_content' => false,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -38,6 +39,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/2.webm',
             'release_date' => '2021-09-30',
             'contain_adult_content' => false,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -51,6 +53,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/3.webm',
             'release_date' => '2012-02-21',
             'contain_adult_content' => false,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -64,6 +67,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/4.webm',
             'release_date' => '2021-11-09',
             'contain_adult_content' => false,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -77,6 +81,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/5.webm',
             'release_date' => '2017-03-17',
             'contain_adult_content' => true,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -90,6 +95,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/6.webm',
             'release_date' => '2015-01-23',
             'contain_adult_content' => true,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -103,6 +109,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/7.webm',
             'release_date' => '2021-10-05',
             'contain_adult_content' => false,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -116,6 +123,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/8.webm',
             'release_date' => '2017-10-27',
             'contain_adult_content' => true,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -129,6 +137,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/9.webm',
             'release_date' => '2021-05-14',
             'contain_adult_content' => false,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -142,6 +151,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/10.webm',
             'release_date' => '2014-09-02',
             'contain_adult_content' => false,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -155,6 +165,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/11.webm',
             'release_date' => '2020-08-21',
             'contain_adult_content' => true,
+            'category_id' => random_int(1, 11),
         ]);
 
         DB::table('games')->insert([
@@ -168,6 +179,7 @@ class GameSeeder extends Seeder
             'trailer_video_path' => 'video/games/12.webm',
             'release_date' => '2020-03-11',
             'contain_adult_content' => true,
+            'category_id' => random_int(1, 11),
         ]);
     }
 }
