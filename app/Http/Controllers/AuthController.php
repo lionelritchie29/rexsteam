@@ -41,9 +41,10 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
+        $remember_me = $request->has('remember_me');
         $credentials = $request->only('username', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember_me)) {
             return redirect()->route('home')->with('success', 'Succesfully logged in');
         }
 

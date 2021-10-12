@@ -103,12 +103,14 @@
             const userMenuBtn = document.getElementById('user-menu-btn');
             const userMenuDropdown = document.getElementById('user-menu-dropdown');
 
-            userMenuBtn.addEventListener('click', () => {
-                if (userMenuDropdown.classList.contains('hidden'))
-                    userMenuDropdown.classList.remove('hidden');
-                else
-                    userMenuDropdown.classList.add('hidden');
-            })
+            if (userMenuBtn) {
+                userMenuBtn.addEventListener('click', () => {
+                    if (userMenuDropdown.classList.contains('hidden'))
+                        userMenuDropdown.classList.remove('hidden');
+                    else
+                        userMenuDropdown.classList.add('hidden');
+                });
+            }
         </script>
 
         @stack('script')
