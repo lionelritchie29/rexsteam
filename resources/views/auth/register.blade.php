@@ -64,6 +64,10 @@
                                         Sign Up
                                     </button>
                                 </div>
+
+                                <div class="text-right mt-1">
+                                    <a href="{{ route('showLogin') }}" class="text-indigo-500 hover:text-indigo-400">Already have an account?</a>
+                                </div>
                             </form>
                         </div>
                     </div>
