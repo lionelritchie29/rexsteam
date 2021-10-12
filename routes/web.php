@@ -5,6 +5,7 @@ use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\GameController;
 use \App\Http\Controllers\CartController;
+use \App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,8 @@ Route::middleware('auth')->prefix('cart')->group(function() {
     Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::post('/confirm-delete', [CartController::class, 'confirmDelete'])->name('cart.confirm-delete');
     Route::post('/delete', [CartController::class, 'delete'])->name('cart.delete');
+});
+
+Route::middleware('auth')->prefix('transaction')->group(function() {
+    Route::get('/create', [TransactionController::class, 'create'])->name('transaction.create');
 });

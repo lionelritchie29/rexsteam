@@ -24,10 +24,10 @@
                 <li>
                     <div class="block bg-gray-800 px-4 py-4 text-gray-300 flex justify-between items-center">
                         <div>Total Price: <span class="font-bold">Rp. {{ $games->sum('price') }}</span></div>
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="button">
+                        <a href="{{ route('transaction.create') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             <x-heroicon-o-truck class="w-4 h-4 mr-1" />
                             Checkout
-                        </button>
+                        </a>
                     </div>
                 </li>
         </ul>
