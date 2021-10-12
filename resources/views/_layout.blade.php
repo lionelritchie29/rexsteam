@@ -47,6 +47,10 @@
                             <div class="flex space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                 <a href="{{ route('home') }}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a>
+
+                                @if(auth()->check() && auth()->user()->role->name == \App\Helper\Constant::$ADMIN_ROLE)
+                                    <a href="{{ route('home') }}" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Manage Game</a>
+                                @endif
                             </div>
                         </div>
                     </div>
