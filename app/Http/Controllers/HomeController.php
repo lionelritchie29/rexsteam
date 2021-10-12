@@ -13,7 +13,7 @@ class HomeController extends Controller
     }
 
     public function search(Request $request) {
-        $query = $request->query('search');
+        $query = $request->query('query');
 
         $games = Game::where('title', 'LIKE', '%' . $query .'%')->paginate(8)->withQueryString();
         return view('search-game', ['games' => $games]);

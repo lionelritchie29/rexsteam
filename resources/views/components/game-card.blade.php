@@ -1,4 +1,4 @@
-<li class="relative cursor-pointer">
+<a href="{{ route('game.show', ['id' => $game->id]) }}" class="relative cursor-pointer">
     <div class="group block w-full aspect-w-10 aspect-h-7 rounded-t-lg bg-gray-100 overflow-hidden">
         <img src="{{ asset('storage/' . $game->image_cover_path) }}" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
         <button type="button" class="absolute inset-0 focus:outline-none">
@@ -14,4 +14,4 @@
             </span>
         </p>
     </div>
-</li>
+</a>

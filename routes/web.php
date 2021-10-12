@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\HomeController;
+use \App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,8 @@ Route::prefix('auth')->group(function () {
     });
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route::prefix('game')->group(function() {
+    Route::get('/{id}', [GameController::class, 'show'])->name('game.show');
 });
