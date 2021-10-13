@@ -49,7 +49,7 @@
                                 <a href="{{ route('home') }}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a>
 
                                 @if(auth()->check() && auth()->user()->role->name == \App\Helper\Constant::$ADMIN_ROLE)
-                                    <a href="{{ route('home') }}" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Manage Game</a>
+                                    <a href="{{ route('manage.game.index') }}" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Manage Game</a>
                                 @endif
                             </div>
                         </div>

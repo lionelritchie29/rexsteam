@@ -48,3 +48,8 @@ Route::middleware('auth')->prefix('transaction')->group(function() {
     Route::post('/store', [TransactionController::class, 'store'])->name('transaction.store');
     Route::get('/{id}/receipt', [TransactionController::class, 'showReceipt'])->name('transaction.receipt');
 });
+
+Route::middleware('auth')->prefix('manage/game')->group(function() {
+    Route::get('/', [GameController::class, 'manage'])->name('manage.game.index');
+    Route::post('/', [GameController::class, 'manage'])->name('manage.game.search');
+});
