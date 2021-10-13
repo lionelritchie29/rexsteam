@@ -3,10 +3,19 @@
 @section('title', 'Manage Game')
 
 @section('content')
+    @if(session('confirm-delete'))
+        @php($game_to_be_del = session('confirm-delete'))
+        <x-delete-confirmation-modal
+            :itemName="$game_to_be_del->title"
+            :itemId="$game_to_be_del->id"
+            :deleteActionRouteName="'manage.game.delete'"
+            :cancelActionRouteName="'manage.game.index'"
+        />
+    @endif
+
     <h1 class="mt-6 text-white text-2xl font-bold mb-3">Manage Games</h1>
 
-
-
+    <div class="mb-6">
         <form class="bg-gray-900 rounded p-6 shadow" method="POST" action="{{ route('manage.game.search') }}">
             @csrf
             <h4 class="text-gray-300 text-sm">Filter by game name</h4>
@@ -48,4 +57,5 @@
 
             {{ $games->links() }}
         @endif
+    </div>
 @endsection

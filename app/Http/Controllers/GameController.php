@@ -33,4 +33,20 @@ class GameController extends Controller
         $game = Game::find($id);
         return view('game.show', ['game' => $game]);
     }
+
+    public function confirmDelete(Request $request) {
+        $game_id = $request->input('game_id');
+
+        $game = Game::find($game_id);
+        return redirect()->back()->with('confirm-delete', $game);
+    }
+
+    public function delete(Request $request) {
+        $game_id = $request->input('game_id');
+
+        $game = Game::find($game_id);
+        $game->delete();
+
+        return redirect()->back();
+    }
 }

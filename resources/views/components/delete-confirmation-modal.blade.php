@@ -16,7 +16,7 @@
                     </h3>
                     <div class="mt-2">
                         <p class="text-sm text-gray-500">
-                            Are you sure you want to remove {{ $itemName }} from the cart?
+                            Are you sure you want to remove {{ $itemName }} ? This action can't be undone.
                         </p>
                     </div>
                 </div>

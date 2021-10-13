@@ -18,13 +18,21 @@
     </a>
 
     @if ($isManage)
-    <div class="text-right mr-2 mt-1">
-        <button class="flex-shrink-0 inline-block px-2 py-0.5 bg-blue-600 hover:bg-blue-500 text-blue-200 text-xs font-medium rounded-full">
-            Update
-        </button>
-        <button class="flex-shrink-0 inline-block px-2 py-0.5 bg-red-600 hover:bg-red-500 text-red-200 text-xs font-medium rounded-full">
-            Delete
-        </button>
+    <div class="text-right mr-2 mt-1 flex justify-end">
+        <form action="{{ route('manage.game.confirm-delete') }}" method="POST" class="mr-1">
+            @csrf
+            <input type="hidden" value="{{ $game->id }}" name="game_id">
+            <button class="flex-shrink-0 inline-block px-2 py-0.5 bg-blue-600 hover:bg-blue-500 text-blue-200 text-xs font-medium rounded-full">
+                Update
+            </button>
+        </form>
+        <form action="{{ route('manage.game.confirm-delete') }}" method="POST">
+            @csrf
+            <input type="hidden" value="{{ $game->id }}" name="game_id">
+            <button class="flex-shrink-0 inline-block px-2 py-0.5 bg-red-600 hover:bg-red-500 text-red-200 text-xs font-medium rounded-full">
+                Delete
+            </button>
+        </form>
     </div>
     @endif
 
