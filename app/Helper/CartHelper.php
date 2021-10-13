@@ -11,6 +11,8 @@ class CartHelper
     private static $ONE_DAY_IN_MINUTES = 1440;
 
     public static function add($game_id) {
+        $game_ids_in_cart = null;
+
         if (Cookie::get(Constant::$CART_KEY)) {
             $game_ids_in_cart = CartHelper::get();
         }

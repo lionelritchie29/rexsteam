@@ -7,14 +7,17 @@ use Illuminate\View\Component;
 class CartCard extends Component
 {
     public $game;
+    public $showDeleteBtn;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($game)
+    public function __construct($game, $showDeleteBtn)
     {
         $this->game = $game;
+        $this->showDeleteBtn = $showDeleteBtn;
     }
 
     /**

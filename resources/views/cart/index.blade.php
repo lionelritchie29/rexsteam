@@ -19,7 +19,7 @@
         @if (count($games) > 0)
             <ul class="divide-y divide-gray-600">
                 @foreach($games as $game)
-                    <x-cart-card :game="$game"></x-cart-card>
+                    <x-cart-card :game="$game" :show-delete-btn="true"></x-cart-card>
                 @endforeach
 
                 <li>

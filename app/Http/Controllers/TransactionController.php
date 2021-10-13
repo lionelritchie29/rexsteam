@@ -7,7 +7,6 @@ use App\Http\Requests\PostTransactionRequest;
 use App\Models\Game;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
@@ -47,4 +46,15 @@ class TransactionController extends Controller
         CartHelper::clear();
         return view('cart.index');
     }
+
+    public function showReceipt($id) {
+        $transaction = TransactionHeader::find($id);
+        $game_ids = $transaction->details->map(function ($item, $key) {
+           return $item->game_id;
+        });
+        $games = Game::find($game_ids);
+
+        return view('transaction.receipt')->with('transaction', $transaction)->with('games', $games);
+    }
+
 }

@@ -20,4 +20,8 @@ class TransactionHeader extends Model
         'country',
         'purchased_at'
     ];
+
+    public function details() {
+        return $this->hasMany(TransactionDetail::class, 'transaction_id');
+    }
 }
