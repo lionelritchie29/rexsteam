@@ -49,6 +49,11 @@ class TransactionController extends Controller
 
     public function showReceipt($id) {
         $transaction = TransactionHeader::find($id);
+
+        if ($transaction == null || $transaction->user_id != Auth::user()->id) {
+            return redirect()->route('home');
+        }
+
         $game_ids = $transaction->details->map(function ($item, $key) {
            return $item->game_id;
         });
