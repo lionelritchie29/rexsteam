@@ -34,6 +34,10 @@ class GameController extends Controller
         return view('game.show', ['game' => $game]);
     }
 
+    public function create() {
+        return view('manage.game.create');
+    }
+
     public function confirmDelete(Request $request) {
         $game_id = $request->input('game_id');
 

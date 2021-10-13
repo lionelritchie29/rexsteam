@@ -13,7 +13,14 @@
         />
     @endif
 
-    <h1 class="mt-6 text-white text-2xl font-bold mb-3">Manage Games</h1>
+    <div class="flex justify-between items-center">
+        <h1 class="mt-6 text-white text-2xl font-bold mb-3">Manage Games</h1>
+        <div>
+            <a href="{{ route('manage.game.create') }}" type="submit" class="mt-3 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Add Game
+            </a>
+        </div>
+    </div>
 
     <div class="mb-6">
         <form class="bg-gray-900 rounded p-6 shadow" method="POST" action="{{ route('manage.game.search') }}">

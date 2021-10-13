@@ -54,4 +54,5 @@ Route::middleware('auth')->prefix('manage/game')->group(function() {
     Route::post('/', [GameController::class, 'manage'])->name('manage.game.search');
     Route::post('/confirm-delete', [GameController::class, 'confirmDelete'])->name('manage.game.confirm-delete');
     Route::post('/delete', [GameController::class, 'delete'])->name('manage.game.delete');
+    Route::get('create', [GameController::class, 'create'])->name('manage.game.create');
 });
