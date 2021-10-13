@@ -16,10 +16,11 @@
     <h1 class="mt-6 text-white text-2xl font-bold">Your Carts</h1>
 
     <div class="mt-3 mb-6 shadow overflow-hidden sm:rounded-md">
-        <ul class="divide-y divide-gray-600">
-            @foreach($games as $game)
-                <x-cart-card :game="$game"></x-cart-card>
-            @endforeach
+        @if (count($games) > 0)
+            <ul class="divide-y divide-gray-600">
+                @foreach($games as $game)
+                    <x-cart-card :game="$game"></x-cart-card>
+                @endforeach
 
                 <li>
                     <div class="block bg-gray-800 px-4 py-4 text-gray-300 flex justify-between items-center">
@@ -30,6 +31,9 @@
                         </a>
                     </div>
                 </li>
-        </ul>
+            </ul>
+        @else
+            <x-warning-alert header="Ups" message="There is no item in your cart."></x-warning-alert>
+        @endif
     </div>
 @endsection

@@ -45,4 +45,8 @@ class CartHelper
     public static function isCartExist() {
         return Cookie::get(Constant::$CART_KEY);
     }
+
+    public static function clear() {
+        Cookie::queue(Constant::$CART_KEY, "", CartHelper::$ONE_DAY_IN_MINUTES * -1);
+    }
 }

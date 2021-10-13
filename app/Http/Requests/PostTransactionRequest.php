@@ -28,7 +28,7 @@ class PostTransactionRequest extends FormRequest
             'card_number' => 'required',
             'mm' => 'required|numeric|min:1,12',
             'yy' => 'required|numeric|min:2021,2050',
-            'cvv' => 'required|numeric|between:3,4',
+            'cvv' => 'required|string|between:3,4',
             'zipcode' => 'required|numeric',
         ];
     }

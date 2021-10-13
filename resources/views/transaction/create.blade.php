@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="mt-6 text-white text-2xl font-bold">Transaction Information</h1>
 
-    <div class="bg-gray-800 mt-3 p-6 rounded">
+    <div class="bg-gray-800 mt-3 mb-6 p-6 rounded">
         <form action="{{ route('transaction.store') }}" method="POST" class="space-y-8 divide-y divide-gray-600">
             @csrf
             <div class="space-y-8">
@@ -16,7 +16,7 @@
                                 Card Name
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
-                                <input placeholder="BCA" type="text" name="card_name" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
+                                <input placeholder="Mastercard" type="text" name="card_name" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
                             </div>
                             @error('card_name') <small class="text-red-500">{{ $message }}</small> @enderror
                         </div>
@@ -51,7 +51,7 @@
                                 .
                             </label>
                             <div class="mt-1">
-                                <input type="text" placeholder="YY" name="yy" autocomplete="family-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                <input type="text" placeholder="YYYY" name="yy" autocomplete="family-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
                             @error('yy') <small class="text-red-500">{{ $message }}</small> @enderror
                         </div>
