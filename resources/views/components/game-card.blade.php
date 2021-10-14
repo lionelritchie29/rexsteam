@@ -19,7 +19,7 @@
 
     @if ($isManage)
     <div class="text-right mr-2 mt-1 flex justify-end">
-        <form action="{{ route('manage.game.confirm-delete') }}" method="POST" class="mr-1">
+        <form action="{{ route('manage.game.edit', ['id' => $game->id]) }}" method="GET" class="mr-1">
             @csrf
             <input type="hidden" value="{{ $game->id }}" name="game_id">
             <button class="flex-shrink-0 inline-block px-2 py-0.5 bg-blue-600 hover:bg-blue-500 text-blue-200 text-xs font-medium rounded-full">

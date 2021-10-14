@@ -29,7 +29,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->input('password')),
             'level' => 1,
             'role_id' => $request->input('role'),
-            'picture_path' => 'null'
+            'picture_path' => 'images/users/default.jpg'
         ]);
 
         return redirect()->route('home')->with('success', 'You have been registered succesfully!');

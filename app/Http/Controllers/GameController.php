@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostGameRequest;
+use App\Http\Requests\PutGameRequest;
 use App\Models\Category;
 use App\Models\Game;
 use Illuminate\Http\Request;
@@ -43,6 +44,38 @@ class GameController extends Controller
 
     public function edit($id) {
         $game = Game::find($id);
+        $categories = Category::all();
+        if ($game == null) return redirect()->route('home');
+
+        return view('manage.game.update')->with('categories', $categories)->with('game', $game);
+    }
+
+    public function update($id, PutGameRequest $request) {
+        $game = Game::find($id);
+        $game->description = $request->input('game_description');
+        $game->long_description = $request->input('game_long_description');
+        $game->category_id = $request->input('category_id');
+        $game->price = $request->input('game_price');
+
+        if ($request->has('contain_adult_content')) {
+            $game->contain_adult_content = $request->has('contain_adult_content');
+        }
+
+        if ($request->has('image_cover')) {
+            $image_path = $request->file('image_cover')->store('public/images/games');
+            Storage::delete('public/' . $game->image_cover_path);
+            $game->image_cover_path = str_replace('public/', "", $image_path);
+        }
+
+        if ($request->has('video_trailer')) {
+            $video_path = $request->file('video_trailer')->store('public/video/games');
+            Storage::delete('public/' . $game->trailer_video_path);
+            $game->trailer_video_path = str_replace('public/', "", $video_path);
+        }
+
+        $game->save();
+
+        return redirect()->route('manage.game.index')->with('success', 'Game updated successfully!');
     }
 
     public function store(PostGameRequest $request) {
@@ -66,7 +99,7 @@ class GameController extends Controller
             'release_date' => date('Y-m-d h:i:s')
         ]);
 
-        return redirect()->back()->with('success', 'Create game success');
+        return redirect()->route('manage.game.index')->with('success', 'Create game success');
     }
 
     public function confirmDelete(Request $request) {
