@@ -60,7 +60,11 @@
                         <a href="{{ route('showRegister')  }}" class="text-white hover:bg-gray-700 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</a>
                         @else
                         <!-- Profile dropdown -->
-                        <div class="flex">
+                        <div class="flex items-center">
+                            <div class="hidden lg:block mr-3 text-gray-200 text-sm">
+                                Hi, <span class="font-bold">{{ auth()->user()->fullname }}</span>
+                            </div>
+
                             <div class="hidden relative lg:block lg:w-80 mr-4">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <!-- Heroicon name: solid/search -->
@@ -97,7 +101,7 @@
                                     From: "transform opacity-100 scale-100"
                                     To: "transform opacity-0 scale-95"
                                 -->
-                                <div id="user-menu-dropdown" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                <div id="user-menu-dropdown" class="hidden origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                     <!-- Active: "bg-gray-100", Not Active: "" -->
                                     <a href="#" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-0">Profile</a>
 

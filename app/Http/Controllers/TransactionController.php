@@ -7,6 +7,7 @@ use App\Http\Requests\PostTransactionRequest;
 use App\Models\Game;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
@@ -43,8 +44,12 @@ class TransactionController extends Controller
             ]);
         }
 
+        $user = User::find(Auth::user()->id);
+        $user->level += 1;
+        $user->save();
+
         CartHelper::clear();
-        return view('cart.index');
+        return redirect()->route('transaction.receipt', ['id' => $header->id]);
     }
 
     public function showReceipt($id) {
