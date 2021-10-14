@@ -103,7 +103,7 @@
                                 -->
                                 <div id="user-menu-dropdown" class="hidden origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                     <!-- Active: "bg-gray-100", Not Active: "" -->
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-0">Profile</a>
+                                    <a href="{{ route('manage.user.profile') }}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-0">Profile</a>
 
                                     @if(auth()->user()->role->name == \App\Helper\Constant::$MEMBER_ROLE)
                                         <a href="#" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-1">Friends</a>

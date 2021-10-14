@@ -6,6 +6,7 @@ use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\GameController;
 use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\TransactionController;
+use \App\Http\Controllers\ManageUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,8 @@ Route::middleware('auth')->prefix('manage/game')->group(function() {
     Route::post('/store', [GameController::class, 'store'])->name('manage.game.store');
     Route::get('/{id}/update', [GameController::class, 'edit'])->name('manage.game.edit');
     Route::post('/{id}/update', [GameController::class, 'update'])->name('manage.game.update');
+});
+
+Route::middleware('auth')->prefix('manage/users')->group(function() {
+    Route::get('/profile', [ManageUserController::class, 'profile'])->name('manage.user.profile');
 });
