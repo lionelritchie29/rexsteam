@@ -29,10 +29,6 @@ Category
 - id (pk)
 - name
 
-ShoppingCart
-- user_id (pk, fk to User)
-- game_id (pk, fk to Game)
-
 TransactionHeader
 - id (pk)
 - user_id (fk to User)
