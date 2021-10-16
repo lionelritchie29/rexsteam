@@ -1,7 +1,11 @@
 @extends('manage.user._layout')
 
 @section('manage-user-content')
-    <form action="#" method="POST">
+    <form action="{{ route('manage.user.profile.update') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">
+
         <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="bg-gray-900 py-6 px-4 space-y-6 sm:p-6">
                 <div>
@@ -28,57 +32,60 @@
                         </div>
                     </div>
 
-                    <div class="col-span-3 sm:col-span-2">
+                    <div class="col-span-3">
                         <label class="block text-sm font-medium text-gray-200">
                             Full Name
                         </label>
                         <div class="mt-1 rounded-md shadow-sm flex">
-                            <input type="text" name="full_name" value="{{ auth()->user()->fullname }}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            <input type="text" name="full_name" value="{{ auth()->user()->fullname }}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
                         </div>
+                        @error('full_name') <small class="text-red-500"> {{ $message }}</small> @enderror
                     </div>
 
-                    <div class="col-span-3 sm:col-span-1">
+                    <div class="col-span-3">
                         <label class="block text-sm font-medium text-gray-200">
                             Photo
                         </label>
-                        <div class="mt-1 flex items-center">
-                <span class="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
-                  <img src="{{ asset('storage/' . auth()->user()->picture_path) }}" alt="{{ auth()->user()->fullname }}">
-                </span>
-                            <button type="button" class="ml-5 bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Change
-                            </button>
+                        <div class="mt-1 flex items-center text-white">
+                            <span class="inline-block bg-gray-100 rounded-full overflow-hidden h-28 w-28">
+                              <img src="{{ asset('storage/' . auth()->user()->picture_path) }}" alt="{{ auth()->user()->fullname }}">
+                            </span>
+                            <input name="profile_picture" class="ml-2" type="file">
                         </div>
+                        @error('profile_picture') <small class="text-red-500"> {{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-span-3">
-                        <label for="company_website" class="block text-sm font-medium text-gray-200">
+                        <label class="block text-sm font-medium text-gray-200">
                             Confirm Password
                         </label>
                         <div class="mt-1 rounded-md shadow-sm flex">
-                            <input type="password" name="username" id="username" autocomplete="username" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
+                            <input type="password" name="confirm_password" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
                         </div>
                         <small class="text-gray-300">Fill this field to check if you are authorized</small>
+                        @error('confirm_password') <small class="text-red-500"> {{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-span-3">
-                        <label for="company_website" class="block text-sm font-medium text-gray-200">
+                        <label class="block text-sm font-medium text-gray-200">
                             New Password
                         </label>
                         <div class="mt-1 rounded-md shadow-sm flex">
-                            <input type="password" name="username" id="username" autocomplete="username" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
+                            <input type="password" name="new_password" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
                         </div>
                         <small class="text-gray-300">Only if you want to change your password</small>
+                        @error('new_password') <small class="text-red-500"> {{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-span-3">
-                        <label for="company_website" class="block text-sm font-medium text-gray-200">
+                        <label class="block text-sm font-medium text-gray-200">
                             Confirm New Password
                         </label>
                         <div class="mt-1 rounded-md shadow-sm flex">
-                            <input type="password" name="username" id="username" autocomplete="username" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
+                            <input type="password" name="confirm_new_password" class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
                         </div>
                         <small class="text-gray-300">Only if you want to change your password</small>
+                        @error('confirm_new_password') <small class="text-red-500"> {{ $message }}</small> @enderror
                     </div>
                 </div>
             </div>

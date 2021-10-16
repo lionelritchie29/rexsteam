@@ -46,7 +46,7 @@ Route::middleware('auth')->prefix('cart')->group(function() {
 
 Route::middleware('auth')->prefix('transaction')->group(function() {
     Route::get('/create', [TransactionController::class, 'create'])->name('transaction.create');
-    Route::post('/store', [TransactionController::class, 'store'])->name('transaction.store');
+    Route::post('/{id}/receipt', [TransactionController::class, 'store'])->name('transaction.store');
     Route::get('/{id}/receipt', [TransactionController::class, 'showReceipt'])->name('transaction.receipt');
 });
 
@@ -63,4 +63,5 @@ Route::middleware('auth')->prefix('manage/game')->group(function() {
 
 Route::middleware('auth')->prefix('manage/users')->group(function() {
     Route::get('/profile', [ManageUserController::class, 'profile'])->name('manage.user.profile');
+    Route::put('/profile', [ManageUserController::class, 'updateProfile'])->name('manage.user.profile.update');
 });

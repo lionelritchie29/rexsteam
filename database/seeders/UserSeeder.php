@@ -25,9 +25,9 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'fullname' => 'Mai',
-            'username' => 'mai',
-            'password' => Hash::make('mai'),
+            'fullname' => 'Emilia',
+            'username' => 'emilia',
+            'password' => Hash::make('emilia'),
             'level' => 1,
             'role_id' => 2,
             'picture_path' => 'images/users/default.jpg'
