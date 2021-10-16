@@ -35,6 +35,7 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('game')->group(function() {
     Route::get('/{id}', [GameController::class, 'show'])->name('game.show');
+    Route::post('age-check', [GameController::class, 'ageCheck'])->name('game.age-check');
 });
 
 Route::middleware('auth')->prefix('cart')->group(function() {

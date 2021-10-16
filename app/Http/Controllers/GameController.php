@@ -34,7 +34,27 @@ class GameController extends Controller
 
     public function show($id) {
         $game = Game::find($id);
-        return view('game.show', ['game' => $game]);
+
+        if ($game->contain_adult_content) {
+            return view('game.age-check', ['game' => $game]);
+        } else {
+            return view('game.show', ['game' => $game]);
+        }
+    }
+
+    public function ageCheck(Request $request) {
+        $date_string = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
+        $birth_date = date_create($date_string);
+        $current_date = date_create(date('d-m-Y'));
+        $age = date_diff($birth_date, $current_date);
+        $age_in_year = (int) $age->format('%y');
+
+        if ($age_in_year < 17) {
+            return redirect()->route('home')->with('failed', 'You are not allowed to see the game detail because it contain inappropriate contents!');
+        } else {
+            $game = Game::find($request->input('game_id'));
+            return view('game.show', ['game' => $game]);
+        }
     }
 
     public function create() {
