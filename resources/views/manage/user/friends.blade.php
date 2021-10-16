@@ -21,31 +21,43 @@
 
         <section>
             <h4 class="font-bold">Incoming Friend Requests</h4>
-            <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                @foreach($incoming_requests as $req)
-                    <x-friend-request-card :user="$req->sender" type="incoming"/>
-                @endforeach
-            </ul>
+            @if(count($incoming_requests) > 0)
+                <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    @foreach($incoming_requests as $req)
+                        <x-friend-request-card :user="$req->sender" type="incoming"/>
+                    @endforeach
+                </ul>
+            @else
+                <x-warning-alert header="Ups" message="There is no incoming friend requests"></x-warning-alert>
+            @endif
         </section>
 
         <section>
             <h4 class="font-bold">Pending Friend Requests</h4>
-            <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                @foreach($pending_requests as $req)
-                    <x-friend-request-card :user="$req->target" type="pending"/>
-                @endforeach
-            </ul>
+            @if(count($pending_requests) > 0)
+                <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    @foreach($pending_requests as $req)
+                        <x-friend-request-card :user="$req->target" type="pending"/>
+                    @endforeach
+                </ul>
+            @else
+                <x-warning-alert header="Ups" message="There is no pending friend requests"></x-warning-alert>
+            @endif
         </section>
 
         <section>
             <h4 class="font-bold">Friends</h4>
-            <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach($friends as $friends)
-                    <x-friend-request-card
-                        :user="$friends->target_user_id == auth()->user()->id ? $friends->sender : $friends->target"
-                        type="friend"/>
-                @endforeach
-            </ul>
+            @if(count($friends) > 0)
+                <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach($friends as $friends)
+                        <x-friend-request-card
+                            :user="$friends->target_user_id == auth()->user()->id ? $friends->sender : $friends->target"
+                            type="friend"/>
+                    @endforeach
+                </ul>
+            @else
+                <x-warning-alert header="Ups" message="You have no friends"></x-warning-alert>
+            @endif
         </section>
     </div>
 @endsection

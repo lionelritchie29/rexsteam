@@ -66,4 +66,7 @@ Route::middleware('auth')->prefix('manage/users')->group(function() {
     Route::put('/profile', [ManageUserController::class, 'updateProfile'])->name('manage.user.profile.update');
     Route::get('/friends', [ManageUserController::class, 'friends'])->name('manage.user.friends');
     Route::post('/friends', [ManageUserController::class, 'addFriend'])->name('manage.user.friends.add');
+    Route::post('/friends/accept', [ManageUserController::class, 'acceptFriendRequest'])->name('manage.user.friends.accept');
+    Route::post('/friends/reject', [ManageUserController::class, 'rejectFriendRequest'])->name('manage.user.friends.reject');
+    Route::post('/friends/cancel', [ManageUserController::class, 'cancelFriendRequest'])->name('manage.user.friends.cancel');
 });

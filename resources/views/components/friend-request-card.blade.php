@@ -10,26 +10,45 @@
         <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="{{ asset('storage/' . $user->picture_path) }}">
     </div>
     <div>
-        <div class="-mt-px flex divide-x divide-gray-200">
+        <div>
             @if ($type == 'incoming')
-            <div class="-ml-px w-0 flex-1 flex">
-                <a href="tel:+1-202-555-0170" class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-                    <x-entypo-cross class="w-5 h-5 mr-1"/>
-                    <span class="ml-3">Reject</span>
-                </a>
-            </div>
-            <div class="w-0 flex-1 flex">
-                <a href="mailto:janecooper@example.com" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
-                    <x-heroicon-o-check class="w-5 h-5 mr-1"/>
-                    <span class="ml-3">Accept</span>
-                </a>
-            </div>
+                <div class="flex justify-around">
+                    <form action="{{ route('manage.user.friends.reject') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="sender_user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="target_user_id" value="{{ auth()->user()->id }}">
+                        <div>
+                            <button type="submit" class="flex py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                                <x-entypo-cross class="w-5 h-5 mr-1"/>
+                                <span class="ml-3">Reject</span>
+                            </button>
+                        </div>
+                    </form>
+                    <form action="{{ route('manage.user.friends.accept') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="sender_user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="target_user_id" value="{{ auth()->user()->id }}">
+                        <div>
+                            <button type="submit" class="flex py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                <x-heroicon-o-check class="w-5 h-5 mr-1"/>
+                                <span class="ml-3">Accept</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             @elseif ($type == 'pending')
-                <div class="w-0 flex-1 flex">
-                    <a href="mailto:janecooper@example.com" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
-                        <x-entypo-cross class="w-5 h-5 mr-1"/>
-                        <span class="ml-3">Cancel</span>
-                    </a>
+                <div>
+                    <form action="{{ route('manage.user.friends.cancel') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="sender_user_id" value="{{ auth()->user()->id }}">
+                        <input type="hidden" name="target_user_id" value="{{ $user->id }}">
+                        <div class="mx-auto">
+                            <button type="submit" href="mailto:janecooper@example.com" class="flex mx-auto text-sm py-3 justify-center items-center text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                <x-entypo-cross class="w-5 h-5 mr-1"/>
+                                <span class="ml-3">Cancel</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             @endif
         </div>

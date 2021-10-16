@@ -64,7 +64,8 @@ class ManageUserController extends Controller
         $target_user = User::where('username', $request->input('username'))->first();
 
         if ($target_user == null) {
-            return redirect()->back()->with('failed', 'Username ' . $request->input('username') . ' does not exist!');
+            return redirect()->back()
+                ->with('failed', 'Username ' . $request->input('username') . ' does not exist!');
         }
 
         $friend_list = FriendRequest::where(function ($query) use ($sender_id, $target_user) {
@@ -74,7 +75,8 @@ class ManageUserController extends Controller
         })->get();
 
         if (count($friend_list) > 0) {
-            return redirect()->back()->with('failed', $target_user->fullname . ' is already in incoming friend requests, pending friend requests, or is already your friend!');
+            return redirect()->back()
+                ->with('failed', $target_user->fullname . ' is already in incoming friend requests, pending friend requests, or is already your friend!');
         }
 
         FriendRequest::create([
@@ -84,5 +86,29 @@ class ManageUserController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Successfully sent friend request to ' . $target_user->fullname . ' (' . $target_user->username . ')');
+    }
+
+    public function acceptFriendRequest(Request $request) {
+        FriendRequest::where('sender_user_id', $request->input('sender_user_id'))
+            ->where('target_user_id', $request->input('target_user_id'))
+            ->update(['status' => 'accepted']);
+
+        return redirect()->back()->with('success', 'Successfully accepted friend request!');
+    }
+
+    public function rejectFriendRequest(Request $request) {
+        FriendRequest::where('sender_user_id', $request->input('sender_user_id'))
+            ->where('target_user_id', $request->input('target_user_id'))
+            ->delete();
+
+        return redirect()->back()->with('success', 'Successfully rejected friend request!');
+    }
+
+    public function cancelFriendRequest(Request $request) {
+        FriendRequest::where('sender_user_id', $request->input('sender_user_id'))
+            ->where('target_user_id', $request->input('target_user_id'))
+            ->delete();
+
+        return redirect()->back()->with('success', 'Successfully canceled friend request!');
     }
 }
