@@ -32,5 +32,59 @@ class UserSeeder extends Seeder
             'role_id' => 2,
             'picture_path' => 'images/users/default.jpg'
         ]);
+
+        DB::table('users')->insert([
+            'fullname' => 'Mai',
+            'username' => 'sakurajima',
+            'password' => Hash::make('sakurajima'),
+            'level' => 1,
+            'role_id' => 2,
+            'picture_path' => 'images/users/default.jpg'
+        ]);
+
+        DB::table('users')->insert([
+            'fullname' => 'Kassandra',
+            'username' => 'kassandra',
+            'password' => Hash::make('kassandra'),
+            'level' => 1,
+            'role_id' => 2,
+            'picture_path' => 'images/users/default.jpg'
+        ]);
+
+        DB::table('users')->insert([
+            'fullname' => 'Ellie',
+            'username' => 'ellietlou',
+            'password' => Hash::make('ellietlou'),
+            'level' => 1,
+            'role_id' => 2,
+            'picture_path' => 'images/users/default.jpg'
+        ]);
+
+        DB::table('users')->insert([
+            'fullname' => 'Kaede',
+            'username' => 'kaede',
+            'password' => Hash::make('kaede99'),
+            'level' => 1,
+            'role_id' => 2,
+            'picture_path' => 'images/users/default.jpg'
+        ]);
+
+        DB::table('users')->insert([
+            'fullname' => 'Nezuko',
+            'username' => 'nezuko',
+            'password' => Hash::make('nezuko'),
+            'level' => 1,
+            'role_id' => 2,
+            'picture_path' => 'images/users/default.jpg'
+        ]);
+
+        DB::table('users')->insert([
+            'fullname' => 'Shinobu Kocho',
+            'username' => 'shinobu',
+            'password' => Hash::make('shinobu'),
+            'level' => 1,
+            'role_id' => 2,
+            'picture_path' => 'images/users/default.jpg'
+        ]);
     }
 }

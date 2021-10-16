@@ -106,7 +106,7 @@
                                     <a href="{{ route('manage.user.profile') }}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-0">Profile</a>
 
                                     @if(auth()->user()->role->name == \App\Helper\Constant::$MEMBER_ROLE)
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-1">Friends</a>
+                                        <a href="{{ route('manage.user.friends') }}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-1">Friends</a>
                                         <a href="#" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-1">Transaction History</a>
                                     @endif
 

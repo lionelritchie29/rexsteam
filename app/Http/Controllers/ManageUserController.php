@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PutProfileRequest;
+use App\Models\FriendRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ManageUserController extends Controller
@@ -37,5 +39,19 @@ class ManageUserController extends Controller
 
         $user->save();
         return redirect()->back()->with('success', 'Profile updated successfully!');
+    }
+
+    public function friends() {
+        $user_id = Auth::user()->id;
+        $incoming_requests = FriendRequest::where('target_user_id', $user_id)->where('status', 'pending')->get();
+        $pending_requests = FriendRequest::where('sender_user_id', $user_id)->where('status', 'pending')->get();
+        $friends = FriendRequest::where(function ($query) {
+            $query->where('target_user_id', Auth::user()->id)->orWhere('sender_user_id', Auth::user()->id);
+        })->where('status', 'accepted')->get();
+
+        return view('manage.user.friends')
+            ->with('incoming_requests', $incoming_requests)
+            ->with('pending_requests', $pending_requests)
+            ->with('friends', $friends);
     }
 }
