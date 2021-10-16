@@ -7,12 +7,15 @@
         <section>
             <h4 class="font-bold">Add Friends</h4>
             <div>
-                <form class="mt-1 flex">
-                    <input type="text" name="username" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="Username">
+                <form class="mt-1 flex" action="{{ route('manage.user.friends.add') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="sender_user_id" value="{{ auth()->user()->id }}">
+                    <input type="text" name="username" class="text-gray-700 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="Username">
                     <button type="submit" class="inline-flex items-center px-3 ml-2 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Add
                     </button>
                 </form>
+                @error('username') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </section>
 
@@ -36,7 +39,7 @@
 
         <section>
             <h4 class="font-bold">Friends</h4>
-            <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach($friends as $friends)
                     <x-friend-request-card
                         :user="$friends->target_user_id == auth()->user()->id ? $friends->sender : $friends->target"

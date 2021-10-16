@@ -9,6 +9,12 @@ class FriendRequest extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'sender_user_id',
+        'target_user_id',
+        'status'
+    ];
+
     public function sender() {
         return $this->belongsTo(User::class, 'sender_user_id');
     }

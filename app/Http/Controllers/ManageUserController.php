@@ -54,4 +54,35 @@ class ManageUserController extends Controller
             ->with('pending_requests', $pending_requests)
             ->with('friends', $friends);
     }
+
+    public function addFriend(Request $request) {
+        $request->validate([
+            'username' => 'required',
+        ]);
+
+        $sender_id = $request->input('sender_user_id');
+        $target_user = User::where('username', $request->input('username'))->first();
+
+        if ($target_user == null) {
+            return redirect()->back()->with('failed', 'Username ' . $request->input('username') . ' does not exist!');
+        }
+
+        $friend_list = FriendRequest::where(function ($query) use ($sender_id, $target_user) {
+            $query->where('sender_user_id', $sender_id)->where('target_user_id', $target_user->id);
+        })->orWhere(function ($query) use ($sender_id, $target_user) {
+            $query->where('sender_user_id', $target_user->id)->where('target_user_id', $sender_id);
+        })->get();
+
+        if (count($friend_list) > 0) {
+            return redirect()->back()->with('failed', $target_user->fullname . ' is already in incoming friend requests, pending friend requests, or is already your friend!');
+        }
+
+        FriendRequest::create([
+            'sender_user_id' => $sender_id,
+            'target_user_id' => $target_user->id,
+            'status' => 'pending'
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully sent friend request to ' . $target_user->fullname . ' (' . $target_user->username . ')');
+    }
 }

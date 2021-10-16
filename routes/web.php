@@ -65,4 +65,5 @@ Route::middleware('auth')->prefix('manage/users')->group(function() {
     Route::get('/profile', [ManageUserController::class, 'profile'])->name('manage.user.profile');
     Route::put('/profile', [ManageUserController::class, 'updateProfile'])->name('manage.user.profile.update');
     Route::get('/friends', [ManageUserController::class, 'friends'])->name('manage.user.friends');
+    Route::post('/friends', [ManageUserController::class, 'addFriend'])->name('manage.user.friends.add');
 });
