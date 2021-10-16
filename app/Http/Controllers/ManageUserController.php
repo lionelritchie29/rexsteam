@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PutProfileRequest;
 use App\Models\FriendRequest;
+use App\Models\TransactionHeader;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -110,5 +111,10 @@ class ManageUserController extends Controller
             ->delete();
 
         return redirect()->back()->with('success', 'Successfully canceled friend request!');
+    }
+
+    public function transactionHistory() {
+        $transactions = TransactionHeader::where('user_id', Auth::user()->id)->get();
+        return view('manage.user.transaction-history')->with('transactions', $transactions);
     }
 }

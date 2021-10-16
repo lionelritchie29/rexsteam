@@ -20,7 +20,7 @@
                         </span>
                     </a>
 
-                    <a href="#" class="text-gray-200 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
+                    <a href="{{ route('manage.user.transaction-history') }}" class="text-gray-200 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                         <span class="truncate">
                           Transaction History
                         </span>

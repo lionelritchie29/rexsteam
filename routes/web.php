@@ -46,7 +46,7 @@ Route::middleware('auth')->prefix('cart')->group(function() {
 
 Route::middleware('auth')->prefix('transaction')->group(function() {
     Route::get('/create', [TransactionController::class, 'create'])->name('transaction.create');
-    Route::post('/{id}/receipt', [TransactionController::class, 'store'])->name('transaction.store');
+    Route::post('/store', [TransactionController::class, 'store'])->name('transaction.store');
     Route::get('/{id}/receipt', [TransactionController::class, 'showReceipt'])->name('transaction.receipt');
 });
 
@@ -69,4 +69,5 @@ Route::middleware('auth')->prefix('manage/users')->group(function() {
     Route::post('/friends/accept', [ManageUserController::class, 'acceptFriendRequest'])->name('manage.user.friends.accept');
     Route::post('/friends/reject', [ManageUserController::class, 'rejectFriendRequest'])->name('manage.user.friends.reject');
     Route::post('/friends/cancel', [ManageUserController::class, 'cancelFriendRequest'])->name('manage.user.friends.cancel');
+    Route::get('transaction-history', [ManageUserController::class, 'transactionHistory'])->name('manage.user.transaction-history');
 });
