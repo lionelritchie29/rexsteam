@@ -26,8 +26,8 @@ class PostTransactionRequest extends FormRequest
         return [
             'card_name' => 'required|string|min:6',
             'card_number' => 'required',
-            'mm' => 'required|numeric|min:1,12',
-            'yy' => 'required|numeric|min:2021,2050',
+            'mm' => 'required|numeric|between:1,12',
+            'yy' => 'required|numeric|between:2021,2050',
             'cvv' => 'required|string|between:3,4',
             'zipcode' => 'required|numeric',
         ];

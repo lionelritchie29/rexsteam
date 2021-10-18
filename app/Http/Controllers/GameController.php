@@ -6,7 +6,9 @@ use App\Http\Requests\PostGameRequest;
 use App\Http\Requests\PutGameRequest;
 use App\Models\Category;
 use App\Models\Game;
+use App\Models\TransactionHeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class GameController extends Controller
@@ -35,11 +37,23 @@ class GameController extends Controller
     public function show($id) {
         $game = Game::find($id);
 
+        if (Auth::check()) {
+            $alreadyOwned = $this->checkAlreadyOwned(Auth::user()->id, $game->id);
+        }
+
         if ($game->contain_adult_content) {
             return view('game.age-check', ['game' => $game]);
         } else {
-            return view('game.show', ['game' => $game]);
+            return view('game.show')->with('game', $game)->with('alreadyOwned', $alreadyOwned);
         }
+    }
+
+    public function showWithoutCheck($id) {
+        $game = Game::find($id);
+        if (Auth::check()) {
+            $alreadyOwned = $this->checkAlreadyOwned(Auth::user()->id, $game->id);
+        }
+        return view('game.show')->with('game', $game)->with('alreadyOwned', $alreadyOwned);
     }
 
     public function ageCheck(Request $request) {
@@ -53,8 +67,29 @@ class GameController extends Controller
             return redirect()->route('home')->with('failed', 'You are not allowed to see the game detail because it contain inappropriate contents!');
         } else {
             $game = Game::find($request->input('game_id'));
-            return view('game.show', ['game' => $game]);
+            if (Auth::check()) {
+                $alreadyOwned = $this->checkAlreadyOwned(Auth::user()->id, $game->id);
+            }
+            return view('game.show')->with('game', $game)->with('alreadyOwned', $alreadyOwned);
         }
+    }
+
+    private function checkAlreadyOwned($user_id, $game_id) {
+        $headers = TransactionHeader::where('user_id', $user_id)->get();
+
+        if (count($headers) > 0) {
+            foreach ($headers as $header) {
+                $detail = $header->details->filter(function ($value, $key) use ($game_id) {
+                    return $value->game_id == $game_id;
+                });
+
+                if (count($detail) > 0) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public function create() {

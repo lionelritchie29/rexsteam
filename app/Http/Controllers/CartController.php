@@ -29,10 +29,10 @@ class CartController extends Controller
         $game_title = $request->input('game_title');
 
         if (!CartHelper::add($game_id)) {
-            return redirect()->back()->with('failed', $game_title . ' is already in the cart!');
+            return redirect()->route('game.show.checked', ['id' => $game_id])->with('failed', $game_title . ' is already in the cart!');
         }
 
-        return redirect()->back()->with('success', 'Succesfully added ' . $game_title . ' to the cart!');
+        return redirect()->route('game.show.checked', ['id' => $game_id])->with('success', 'Succesfully added ' . $game_title . ' to the cart!');
     }
 
     public function confirmDelete(Request $request) {

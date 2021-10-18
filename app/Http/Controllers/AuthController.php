@@ -21,8 +21,6 @@ class AuthController extends Controller
     }
 
     public function register(RegisterRequest $request) {
-        $request->validated();
-
         User::create([
             'fullname' => $request->input('fullname'),
             'username' => $request->input('username'),

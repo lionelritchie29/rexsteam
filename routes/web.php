@@ -35,23 +35,24 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('game')->group(function() {
     Route::get('/{id}', [GameController::class, 'show'])->name('game.show');
+    Route::get('/{id}/checked', [GameController::class, 'showWithoutCheck'])->name('game.show.checked');
     Route::post('age-check', [GameController::class, 'ageCheck'])->name('game.age-check');
 });
 
-Route::middleware('auth')->prefix('cart')->group(function() {
+Route::middleware('member')->prefix('cart')->group(function() {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
     Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::post('/confirm-delete', [CartController::class, 'confirmDelete'])->name('cart.confirm-delete');
     Route::post('/delete', [CartController::class, 'delete'])->name('cart.delete');
 });
 
-Route::middleware('auth')->prefix('transaction')->group(function() {
+Route::middleware('member')->prefix('transaction')->group(function() {
     Route::get('/create', [TransactionController::class, 'create'])->name('transaction.create');
     Route::post('/store', [TransactionController::class, 'store'])->name('transaction.store');
     Route::get('/{id}/receipt', [TransactionController::class, 'showReceipt'])->name('transaction.receipt');
 });
 
-Route::middleware('auth')->prefix('manage/game')->group(function() {
+Route::middleware('admin')->prefix('manage/game')->group(function() {
     Route::get('/', [GameController::class, 'manage'])->name('manage.game.index');
     Route::post('/', [GameController::class, 'manage'])->name('manage.game.search');
     Route::post('/confirm-delete', [GameController::class, 'confirmDelete'])->name('manage.game.confirm-delete');
@@ -62,13 +63,18 @@ Route::middleware('auth')->prefix('manage/game')->group(function() {
     Route::post('/{id}/update', [GameController::class, 'update'])->name('manage.game.update');
 });
 
-Route::middleware('auth')->prefix('manage/users')->group(function() {
-    Route::get('/profile', [ManageUserController::class, 'profile'])->name('manage.user.profile');
-    Route::put('/profile', [ManageUserController::class, 'updateProfile'])->name('manage.user.profile.update');
-    Route::get('/friends', [ManageUserController::class, 'friends'])->name('manage.user.friends');
-    Route::post('/friends', [ManageUserController::class, 'addFriend'])->name('manage.user.friends.add');
-    Route::post('/friends/accept', [ManageUserController::class, 'acceptFriendRequest'])->name('manage.user.friends.accept');
-    Route::post('/friends/reject', [ManageUserController::class, 'rejectFriendRequest'])->name('manage.user.friends.reject');
-    Route::post('/friends/cancel', [ManageUserController::class, 'cancelFriendRequest'])->name('manage.user.friends.cancel');
-    Route::get('transaction-history', [ManageUserController::class, 'transactionHistory'])->name('manage.user.transaction-history');
+Route::prefix('manage/users')->group(function() {
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ManageUserController::class, 'profile'])->name('manage.user.profile');
+        Route::put('/profile', [ManageUserController::class, 'updateProfile'])->name('manage.user.profile.update');
+    });
+
+    Route::middleware('member')->group(function () {
+        Route::get('/friends', [ManageUserController::class, 'friends'])->name('manage.user.friends');
+        Route::post('/friends', [ManageUserController::class, 'addFriend'])->name('manage.user.friends.add');
+        Route::post('/friends/accept', [ManageUserController::class, 'acceptFriendRequest'])->name('manage.user.friends.accept');
+        Route::post('/friends/reject', [ManageUserController::class, 'rejectFriendRequest'])->name('manage.user.friends.reject');
+        Route::post('/friends/cancel', [ManageUserController::class, 'cancelFriendRequest'])->name('manage.user.friends.cancel');
+        Route::get('transaction-history', [ManageUserController::class, 'transactionHistory'])->name('manage.user.transaction-history');
+    });
 });

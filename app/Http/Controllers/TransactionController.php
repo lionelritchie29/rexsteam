@@ -15,6 +15,7 @@ class TransactionController extends Controller
     public function create() {
         $game_ids_in_cart = CartHelper::get();
         $games = Game::find($game_ids_in_cart);
+        if (count($games) == 0) return redirect()->route('cart.index');
 
         return view('transaction.create', ['games' => $games]);
     }

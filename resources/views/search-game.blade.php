@@ -10,7 +10,7 @@
     @else
         <ul role="list" class="my-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
             @foreach($games as $game)
-                <x-game-card :game="$game"></x-game-card>
+                <x-game-card :game="$game" :isManage="false"></x-game-card>
             @endforeach
         </ul>
 

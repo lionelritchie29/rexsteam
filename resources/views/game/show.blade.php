@@ -36,6 +36,7 @@
         </div>
     </section>
 
+    @if (!auth()->check() || (!$alreadyOwned && auth()->user()->role->name == \App\Helper\Constant::$MEMBER_ROLE))
     <section class="mt-3">
         <div class="bg-gray-900 px-4 py-8 rounded-md relative">
             <span class="text-white font-lg">Buy <span class="font-semibold">{{ $game->title }}</span></span>
@@ -59,6 +60,7 @@
             </form>
         </div>
     </section>
+    @endif
 
     <section class="mt-5 mb-6">
         <h3 class="font-2xl text-gray-200 font-semibold">About this game</h3>

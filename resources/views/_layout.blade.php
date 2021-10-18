@@ -46,10 +46,10 @@
                         <div class="hidden sm:block sm:ml-6">
                             <div class="flex space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="{{ route('home') }}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a>
+                                <a href="{{ route('home') }}" class="{{ request()->route()->getName() == 'home' ? 'bg-gray-900' : 'hover:bg-gray-700' }} text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a>
 
                                 @if(auth()->check() && auth()->user()->role->name == \App\Helper\Constant::$ADMIN_ROLE)
-                                    <a href="{{ route('manage.game.index') }}" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Manage Game</a>
+                                    <a href="{{ route('manage.game.index') }}" class="{{ request()->route()->getName() == 'manage.game.index' ? 'bg-gray-900' : 'hover:bg-gray-700' }} text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Manage Game</a>
                                 @endif
                             </div>
                         </div>
@@ -77,11 +77,13 @@
                                 </form>
                             </div>
 
+                            @if(auth()->user()->role->name == \App\Helper\Constant::$MEMBER_ROLE)
                             <div class="text-white flex items-center">
                                 <a href="{{ route('cart.index') }}">
                                     <x-grommet-cart class="w-6 h-6" />
                                 </a>
                             </div>
+                            @endif
 
                             <div class="ml-3 relative">
                                 <div class="flex">

@@ -13,7 +13,5 @@
                 <x-game-card :game="$game" :is-manage="false"></x-game-card>
             @endforeach
         </ul>
-
-        {{ $games->links() }}
     @endif
 @endsection
