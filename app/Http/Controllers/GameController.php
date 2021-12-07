@@ -134,8 +134,6 @@ class GameController extends Controller
     }
 
     public function store(PostGameRequest $request) {
-        $request->validated();
-
         $image_path = $request->file('image_cover')->store('public/images/games');
         $video_path = $request->file('video_trailer')->store('public/video/games');
         $contain_adult_content = $request->has('contain_adult_content');
