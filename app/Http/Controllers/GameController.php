@@ -37,9 +37,10 @@ class GameController extends Controller
     public function show($id) {
         $game = Game::find($id);
 
+        $alreadyOwned = null;
         if (Auth::check()) {
             $alreadyOwned = $this->checkAlreadyOwned(Auth::user()->id, $game->id);
-        }
+        } 
 
         if ($game->contain_adult_content) {
             return view('game.age-check', ['game' => $game]);
@@ -67,6 +68,7 @@ class GameController extends Controller
             return redirect()->route('home')->with('failed', 'You are not allowed to see the game detail because it contain inappropriate contents!');
         } else {
             $game = Game::find($request->input('game_id'));
+            $alreadyOwned = null;
             if (Auth::check()) {
                 $alreadyOwned = $this->checkAlreadyOwned(Auth::user()->id, $game->id);
             }
